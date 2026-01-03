@@ -1,11 +1,24 @@
-
-// src/App.js
-function App() {
+import { RouterProvider,createBrowserRouter } from "react-router-dom";
+import NavbarRouterLinks from "./Navbar/navbarrouterlinks";
+import Home from "./pages/Home";
+import About from "./pages/about";
+import Contact from "./pages/contact";
+const router = createBrowserRouter([
+  {
+    path :'/',
+    element :<><NavbarRouterLinks/><Home/></>,
+  },
+  {
+    path :'/about',
+    element :<><NavbarRouterLinks/><About/></>,
+  },
+  {
+    path :'/contact',
+    element :<><NavbarRouterLinks/><Contact/></>,
+  },
+])
+export default function App() {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">Tailwind is working!</h1>
-    </div>
+    <RouterProvider router={router} />
   );
 }
-
-export default App;
