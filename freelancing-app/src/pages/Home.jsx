@@ -1,4 +1,5 @@
 import HeroButtons from "../components/searchbar";
+import PopularCategory from "../components/populercategory";
 function App() {
   return (
     <div className="w-full h-screen">
@@ -27,9 +28,9 @@ function App() {
             Connect with skilled freelancers and trusted clients worldwide.
           </p>
           <HeroButtons />
-          {/* CTA Buttons */}
         </div>
       </div>
+      <PopularCategory />
     </div>
   );
 }
