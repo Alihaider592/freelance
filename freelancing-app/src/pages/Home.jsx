@@ -1,3 +1,4 @@
+import HeroButtons from "../components/searchbar";
 function App() {
   return (
     <div className="w-full h-screen">
@@ -7,7 +8,7 @@ function App() {
         style={{
           backgroundImage:
             "url('https://www.mediabistro.com/wp-content/uploads/2016/06/successful-freelancer-repeat-work_opt.jpg')",
-          backgroundPosition: "center 10%", // <-- 10% from top
+          backgroundPosition: "center 10%",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
@@ -25,17 +26,8 @@ function App() {
           <p className="text-gray-200 text-lg md:text-xl mt-4 max-w-xl">
             Connect with skilled freelancers and trusted clients worldwide.
           </p>
-
+          <HeroButtons />
           {/* CTA Buttons */}
-          <div className="flex gap-4 mt-8">
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition">
-              Hire Talent
-            </button>
-
-            <button className="px-6 py-3 bg-white text-blue-600 rounded-md font-medium hover:bg-gray-100 transition">
-              Find Work
-            </button>
-          </div>
         </div>
       </div>
     </div>
