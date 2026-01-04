@@ -1,11 +1,32 @@
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+const SearchBar = ({ placeholder }) => {
+  return (
+    <div className="relative w-full rounded-md transition-shadow duration-200">
+      <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70" />
+      <input
+        type="text"
+        placeholder={placeholder}
+        className="w-full py-3 pl-10 pr-28 text-white placeholder-white/60 
+                   rounded-md bg-white/10 border border-white/30
+                   focus:outline-none focus:ring-1 focus:ring-white/70 transition"
+        autoFocus
+      />
+      <button
+        className="absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-2 
+                   bg-blue-600 bg-opacity-80 text-white rounded-md text-sm font-medium 
+                   hover:bg-blue-700 transition"
+      >
+        Search
+      </button>
+    </div>
+  );
+};
 
 const HeroButtons = () => {
-  const [activeSearch, setActiveSearch] = useState(null); // null | 'findWork' | 'hireTalent'
-
+const [activeSearch, setActiveSearch] = useState("findWork");
   return (
     <div className="flex gap-4 mt-8 relative">
-      {/* Find Work Button */}
       <div className="relative">
         <button
           onClick={() =>
@@ -15,11 +36,9 @@ const HeroButtons = () => {
         >
           Find Work
         </button>
-
-        {/* Animated Find Work Search */}
         <div
           className={`
-            absolute top-full mt-3 left-0 w-[420px]
+            absolute top-full mt-3 left-0 w-[620px]
             transform transition-all duration-300 ease-out
             ${
               activeSearch === "findWork"
@@ -28,16 +47,9 @@ const HeroButtons = () => {
             }
           `}
         >
-          <input
-            type="text"
-            autoFocus
-            placeholder="What work are you looking for?"
-            className="w-full py-3 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
+          <SearchBar placeholder="What work are you looking for?" />
         </div>
       </div>
-
-      {/* Hire Talent Button */}
       <div className="relative">
         <button
           onClick={() =>
@@ -47,11 +59,9 @@ const HeroButtons = () => {
         >
           Hire Talent
         </button>
-
-        {/* Animated Hire Talent Search */}
         <div
           className={`
-            absolute top-full mt-3 left-0 w-[420px]
+            absolute top-full mt-3 left-0 w-[620px]
             transform transition-all duration-300 ease-out
             ${
               activeSearch === "hireTalent"
@@ -60,12 +70,7 @@ const HeroButtons = () => {
             }
           `}
         >
-          <input
-            type="text"
-            autoFocus
-            placeholder="What kind of talent are you looking for?"
-            className="w-full py-3 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
+          <SearchBar placeholder="What kind of talent are you looking for?" />
         </div>
       </div>
     </div>
