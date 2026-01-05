@@ -40,12 +40,7 @@ const TopFreelancer = () => {
         {profilecards.map((profile) => (
           <div
             key={profile.id}
-            className="
-              bg-white border border-gray-200 rounded-3xl
-              shadow-md p-6 flex flex-col justify-between
-              hover:shadow-xl hover:scale-105 transform transition-all duration-300
-              h-[400px]
-            "
+            className="bg-white border border-gray-200 rounded-3xl shadow-md p-6 flex flex-col justify-between hover:shadow-xl hover:scale-105 transition-transform duration-300"
           >
             {/* Top: Service Name + Stars */}
             <div className="flex flex-col items-center mb-4">
@@ -63,18 +58,19 @@ const TopFreelancer = () => {
             </div>
 
             {/* Middle: Description */}
-            <p className="text-gray-600 text-sm text-center flex-1 overflow-hidden line-clamp-4">
+            <p className="text-gray-700 text-sm text-center mt-2 mb-6 line-clamp-4">
               {profile.discription}
             </p>
 
             {/* Bottom: Profile Image + Name */}
-            <div className="flex flex-col items-center mt-4">
+            <div className="flex flex-col items-center mt-auto">
               <img
                 src={profile.image}
                 alt={profile.Name}
-                className="w-20 h-20 rounded-full object-cover border-2 border-teal-500 mb-2"
+                className="w-24 h-24 rounded-full object-cover border-4 border-teal-500 mb-2"
               />
               <h4 className="text-gray-900 font-semibold">{profile.Name}</h4>
+              <p className="text-gray-500 text-xs">{profile.email}</p>
             </div>
           </div>
         ))}
@@ -84,5 +80,6 @@ const TopFreelancer = () => {
 };
 
 export default TopFreelancer;
+
 
 
