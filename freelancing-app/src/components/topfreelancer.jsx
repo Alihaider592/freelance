@@ -36,6 +36,9 @@ const  profilecards=[
 const TopFreelancer = () => {
   return (
     <div className="max-w-[1200px] mx-auto px-4 mt-12">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-700 mb-4">
+        Top freelancers
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {profilecards.map((profile) => (
           <div
