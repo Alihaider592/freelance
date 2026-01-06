@@ -1,4 +1,8 @@
 import { FaStar } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "swiper/css";
 const  profilecards=[
     {
         id : "1",
@@ -40,62 +44,100 @@ const TopFreelancer = () => {
     Top Freelancers
   </h1>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-    {profilecards.map((profile) => (
-      <div
-        key={profile.id}
-        className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-xl transition"
-      >
-        {/* Top row */}
-        <div className="flex gap-4 items-start mb-4">
-          {/* Image */}
-          <img
-            src={profile.image}
-            alt={profile.Name}
-            className="w-20 h-20 rounded-xl object-cover border-2 border-blue-500"
-          />
+  {/* Slider wrapper (important for hover) */}
+  <div className="relative group">
+    {/* Left Arrow */}
+    <button
+      className="custom-prev absolute left-0 top-1/2 -translate-y-1/2 z-10
+                 opacity-0 group-hover:opacity-100
+                 w-11 h-11 flex items-center justify-center
+                 bg-white border border-gray-300 rounded-full
+                 shadow-md hover:bg-blue-500 hover:text-white
+                 transition-all duration-300 ml-2"
+    >
+      <FaChevronLeft />
+    </button>
 
-          {/* Right side */}
-          <div className="flex-1">
-            {/* Name + stars row */}
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {profile.Name}
-                </h3>
-                <p className="text-xs text-gray-500">
-                  {profile.email}
-                </p>
-              </div>
+    {/* Right Arrow */}
+    <button
+      className="custom-next absolute right-0 top-1/2 -translate-y-1/2 z-10
+                 opacity-0 group-hover:opacity-100
+                 w-11 h-11 flex items-center justify-center
+                 bg-white border border-gray-300 rounded-full
+                 shadow-md hover:bg-blue-500 hover:text-white
+                 transition-all duration-300 mr-2"
+    >
+      <FaChevronRight />
+    </button>
 
-              {/* Stars on the right */}
-              <div className="flex gap-1 mt-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FaStar key={star} className="w-3.5 h-3.5 text-yellow-400" />
-                ))}
+    <Swiper
+      modules={[Navigation]}
+      spaceBetween={24}
+      grabCursor
+      navigation={{
+        prevEl: ".custom-prev",
+        nextEl: ".custom-next",
+      }}
+      breakpoints={{
+        320: { slidesPerView: 1 },
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      }}
+      className="px-8" // space so arrows don’t cover cards
+    >
+      {profilecards.map((profile) => (
+        <SwiperSlide key={profile.id}>
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-xl transition h-full">
+            {/* Top row */}
+            <div className="flex gap-4 items-start mb-4">
+              <img
+                src={profile.image}
+                alt={profile.Name}
+                className="w-20 h-20 rounded-xl object-cover border-2 border-blue-500"
+              />
+
+              <div className="flex-1">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {profile.Name}
+                    </h3>
+                    <p className="text-xs text-gray-500">
+                      {profile.email}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-1 mt-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <FaStar
+                        key={star}
+                        className="w-3.5 h-3.5 text-yellow-400"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <span className="inline-block mt-2 px-3 py-1 text-xs rounded-full bg-blue-50 text-blue-600">
+                  {profile.category}
+                </span>
               </div>
             </div>
 
-            {/* Category */}
-            <span className="inline-block mt-2 px-3 py-1 text-xs rounded-full bg-blue-50 text-blue-600">
-              {profile.category}
-            </span>
+            <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+              {profile.discription}
+            </p>
+
+            <button className="w-full py-2 text-sm font-semibold text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition">
+              View Profile
+            </button>
           </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-sm text-gray-600 line-clamp-3 mb-4">
-          {profile.discription}
-        </p>
-
-        {/* Footer */}
-        <button className="w-full py-2 text-sm font-semibold text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition">
-          View Profile
-        </button>
-      </div>
-    ))}
+        </SwiperSlide>
+      ))}
+    </Swiper>
   </div>
 </div>
+
+
 
 
   );
