@@ -1,5 +1,6 @@
 import HeroButtons from "../components/searchbar";
 import PopularCategory from "../components/populercategory";
+import TopFreelancer from "../components/topfreelancer";
 function App() {
   return (
     <div className="w-full h-screen">
@@ -31,6 +32,7 @@ function App() {
         </div>
       </div>
       <PopularCategory />
+      <TopFreelancer/>
     </div>
   );
 }
