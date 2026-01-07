@@ -1,8 +1,8 @@
 import {
   FaUserPlus,
-  FaSearch,
   FaHandshake,
   FaCreditCard,
+  FaBriefcase
 } from "react-icons/fa";
 
 const howworkcards = [
@@ -17,7 +17,7 @@ const howworkcards = [
     title: "Find or Post Work",
     description:
       "Browse projects that match your expertise or post a job and connect with skilled professionals in minutes.",
-    icon: <FaSearch />,
+    icon: <FaBriefcase />,
     showButton: true,
     buttonText: "Find Work",
   },
