@@ -39,32 +39,37 @@ const FAQ = () => {
         <span className="w-20 h-1 bg-blue-600 rounded-full"></span>
       </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              onClick={() =>
-                setOpenIndex(openIndex === index ? null : index)
-              }
-              className="relative p-6 bg-gray-900 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20
-                         cursor-pointer hover:shadow-[0_0_40px_rgba(59,130,246,0.25)]
-                         transition-all duration-300"
-            >
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg md:text-xl font-semibold text-white">
-                  {faq.question}
-                </h3>
-                <span className="text-white text-xl">
-                  {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
-                </span>
-              </div>
-              {openIndex === index && (
-                <p className="mt-4 text-gray-200 leading-relaxed">
-                  {faq.answer}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+  {faqs.map((faq, index) => (
+    <div
+      key={index}
+      onClick={() =>
+        setOpenIndex(openIndex === index ? null : index)
+      }
+      className="relative p-6 bg-gray-900 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20
+                 cursor-pointer hover:shadow-[0_0_40px_rgba(59,130,246,0.25)]
+                 transition-all duration-300 flex flex-col"
+    >
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg md:text-xl font-semibold text-white">
+          {faq.question}
+        </h3>
+        <span className="text-white text-xl">
+          {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+        </span>
+      </div>
+
+      {/* Answer with smooth animation */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          openIndex === index ? "max-h-40 mt-4" : "max-h-0"
+        }`}
+      >
+        <p className="text-gray-200 leading-relaxed">{faq.answer}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );
