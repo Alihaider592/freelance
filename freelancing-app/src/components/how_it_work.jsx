@@ -1,4 +1,4 @@
-const howitwork = () =>{
+const Howitwork = () =>{
     return(
         <div>
             <h2>How It Works</h2>
@@ -6,4 +6,4 @@ const howitwork = () =>{
         </div>
     )
 }
-export default howitwork;
+export default Howitwork;
