@@ -1,20 +1,25 @@
+import { desc } from "framer-motion/client";
 import { FaUserPlus,FaSearch,FaHandshake,FaCreditCard } from "react-icons/fa";
 
 const howworkcards = [
   {
     title: "Create Your Profile",
+    description: "Create a free account and build a professional profile highlighting your skills, experience, and portfolio to stand out.",
     icon: <FaUserPlus />,
   },
   {
     title: "Find or Post Work",
+    description: "Browse thousands of job listings to find the perfect gig or post your own project to attract top freelancers.",
     icon: <FaSearch />,
   },
   {
     title: "Collaborate Securely",
+    description:"Communicate, share files, and work together seamlessly using our built-in collaboration tools.",
     icon: <FaHandshake />,
   },
   {
     title: "Get Paid Securely",
+    description:"Receive payments quickly and securely through our platform, with multiple payment options available.",
     icon: <FaCreditCard />,
   },
 ];
@@ -38,7 +43,7 @@ const Howitwork = () => {
         <span className="w-20 h-1 bg-blue-600 rounded-full"></span>
       </div>
 
-      <div className="mt-20 max-w-[900px] mx-auto">
+      <div className="mt-20 max-w-[100%] mx-auto">
   {howworkcards.map((card, index) => (
     <div key={index} className="flex gap-6 relative pb-12">
       
