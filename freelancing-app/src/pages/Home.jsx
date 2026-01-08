@@ -9,7 +9,7 @@ function App() {
     <div className="w-full h-screen">
       {/* Hero Section */}
       <div
-        className="relative w-full h-[70%] mt-[5%] bg-cover bg-center"
+        className="relative w-full h-[70%] bg-cover bg-center"
         style={{
           backgroundImage:
             "url('https://www.mediabistro.com/wp-content/uploads/2016/06/successful-freelancer-repeat-work_opt.jpg')",
