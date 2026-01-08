@@ -77,13 +77,25 @@ const Footer = () => {
               />
 
               <button
-                className="absolute right-2 top-1/2 -translate-y-1/2
-               px-5 py-2.5 rounded-xl text-sm font-semibold
-               text-white bg-blue-600
-               hover:bg-blue-500 transition"
-              >
-                Subscribe
-              </button>
+  className="absolute right-2 top-1/2 -translate-y-1/2
+             px-6 py-2.5 rounded-xl text-sm font-semibold text-white
+             bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600
+             hover:scale-105
+             transition-all duration-300
+             overflow-hidden group"
+>
+  {/* Shine effect */}
+  <span
+    className="absolute inset-0 bg-white/20
+               translate-x-[-120%] group-hover:translate-x-[120%]
+               transition-transform duration-700 skew-x-12"
+  />
+
+  <span className="relative z-10">
+    Subscribe
+  </span>
+</button>
+
             </div>
           </div>
         </div>
