@@ -3,6 +3,7 @@ import PopularCategory from "../components/populercategory";
 import TopFreelancer from "../components/topfreelancer";
 import Howitwork from "../components/how_it_work";
 import FAQ from "../components/FAQ";
+import Footer from "../components/footer";
 function App() {
   return (
     <div className="w-full h-screen">
@@ -37,6 +38,7 @@ function App() {
       <TopFreelancer/>
       <Howitwork />
       <FAQ />
+      <Footer />
     </div>
   );
 }
