@@ -1,29 +1,25 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
-import logoM from '../assets/logoM.png'
+import logoM from "../assets/logoM.png";
 const Footer = () => {
   return (
     <footer className="bg-gray-950 text-gray-400 pt-20">
       <div className="max-w-[1200px] mx-auto px-4">
-
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16 border-b border-white/10">
-
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">
               Free<span className="text-blue-500">lance</span>
             </h3>
             <p className="text-gray-400 leading-relaxed">
-              Connect with top freelancers and clients worldwide. 
-              Build your profile, showcase your skills, and grow your career.
+              Connect with top freelancers and clients worldwide. Build your
+              profile, showcase your skills, and grow your career.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">
-              Platform
-            </h4>
+            <h4 className="text-lg font-semibold text-white mb-4">Platform</h4>
             <ul className="space-y-3">
               <li className="hover:text-blue-400 cursor-pointer transition">
                 How It Works
@@ -42,9 +38,7 @@ const Footer = () => {
 
           {/* Support */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">
-              Support
-            </h4>
+            <h4 className="text-lg font-semibold text-white mb-4">Support</h4>
             <ul className="space-y-3">
               <li className="hover:text-blue-400 cursor-pointer transition">
                 Help Center
@@ -70,13 +64,24 @@ const Footer = () => {
               Subscribe to get the latest updates and offers.
             </p>
 
-            <div className="flex items-center bg-white/10 border border-white/20 rounded-xl overflow-hidden">
+            <div className="relative max-w-md w-full">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="bg-transparent px-4 py-3 w-full text-white outline-none placeholder-gray-400"
+                placeholder="Enter your email address"
+                className="w-full bg-white/10 backdrop-blur-xl
+               border border-white/20 rounded-2xl
+               px-5 py-4 pr-32
+               text-white outline-none
+               placeholder-gray-400
+               focus:border-blue-500 transition"
               />
-              <button className="px-6 py-3 bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2
+               px-5 py-2.5 rounded-xl text-sm font-semibold
+               text-white bg-blue-600
+               hover:bg-blue-500 transition"
+              >
                 Subscribe
               </button>
             </div>
@@ -105,7 +110,6 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
       </div>
     </footer>
   );
