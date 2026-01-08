@@ -19,9 +19,9 @@ const SignupPage = () => {
         {/* Illustration / Image */}
         <div className="hidden md:block w-1/2">
           <img
-            src="https://www.mediabistro.com/wp-content/uploads/2016/06/successful-freelancer-repeat-work_opt.jpg"
+            src="https://img.freepik.com/free-photo/medium-shot-man-living-as-digital-nomad_23-2151205371.jpg?semt=ais_incoming&w=740&q=80"
             alt="Freelancer Illustration"
-            className="rounded-2xl shadow-lg"
+            className="rounded-2xl shadow-lg h-[690px] w-full object-cover"
           />
         </div>
 
