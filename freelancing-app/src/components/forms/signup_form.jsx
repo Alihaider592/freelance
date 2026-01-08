@@ -17,7 +17,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="">
       {/* Form Card */}
       <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-10 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
