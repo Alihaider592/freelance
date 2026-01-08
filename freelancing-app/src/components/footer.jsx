@@ -1,5 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
-
+import logoM from '../assets/logoM.png'
 const Footer = () => {
   return (
     <footer className="bg-gray-950 text-gray-400 pt-20">
@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">
-              Freelance<span className="text-blue-500">Hub</span>
+              Free<span className="text-blue-500">lance</span>
             </h3>
             <p className="text-gray-400 leading-relaxed">
               Connect with top freelancers and clients worldwide. 
