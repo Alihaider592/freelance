@@ -6,7 +6,7 @@ const SignupPage = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-cyan-500 py-16 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-2">
-          Join FreelanceHub
+          Join Freelance
         </h1>
         <p className="text-lg md:text-xl">
           Create your profile and start hiring or getting hired today.
