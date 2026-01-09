@@ -27,7 +27,7 @@ const LoadingScreen = () => {
 
         {/* Brand Name */}
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-[0.25em] uppercase mb-10">
-          Freelance<span className="text-blue-600">Hub</span>
+          Free<span className="text-blue-600">lance</span>
         </h1>
 
         {/* Staggered Block Loader */}
@@ -38,7 +38,7 @@ const LoadingScreen = () => {
               className="w-3 h-10 bg-slate-200 rounded-full overflow-hidden relative"
             >
               <div
-                className="absolute inset-0 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-full"
+                className="absolute inset-0 bg-gradient-to-t from-cyan-600 to-blue-700 rounded-full"
                 style={{
                   animation: `blockFill 1.5s ease-in-out infinite`,
                   animationDelay: `${i * 0.2}s`,
