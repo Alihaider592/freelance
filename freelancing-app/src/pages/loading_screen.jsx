@@ -1,4 +1,4 @@
-import logoM from "../assets/logo.png"; 
+import logoM from '../assets/logoM.png'
 
 const LoadingScreen = () => {
   return (
