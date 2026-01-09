@@ -1,34 +1,70 @@
-import logoM from '../assets/logoM.png'
+import React from 'react';
+import logoM from '../assets/logoM.png';
 
 const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center
-                    bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center">
+      
+      {/* Glassy Light Background */}
+      <div className="absolute inset-0 bg-white/40 backdrop-blur-xl"></div>
+      
+      <div className="relative flex flex-col items-center">
+        
+        {/* Logo Section */}
+        <div className="relative mb-12">
+          {/* Glowing Halo behind logo */}
+          <div className="absolute inset-0 w-32 h-32 rounded-full bg-blue-400/20 blur-3xl animate-pulse"></div>
+          <img
+            src={logoM}
+            alt="FreelanceHub"
+            className="w-24 h-24 object-contain animate-[pulseScale_2s_ease-in-out_infinite] relative z-10 drop-shadow-lg"
+          />
+          
+          {/* Geometric Corner Borders */}
+          <div className="absolute -top-4 -left-4 w-6 h-6 border-t-2 border-l-2 border-blue-600/40"></div>
+          <div className="absolute -bottom-4 -right-4 w-6 h-6 border-b-2 border-r-2 border-blue-600/40"></div>
+        </div>
 
-      {/* Glow background */}
-      <div className="absolute w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-3xl"></div>
-      <div className="absolute w-[300px] h-[300px] bg-cyan-400/20 rounded-full blur-3xl"></div>
+        {/* Brand Name */}
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-[0.25em] uppercase mb-10">
+          Freelance<span className="text-blue-600">Hub</span>
+        </h1>
 
-      {/* Logo */}
-      <img
-        src={logoM}
-        alt="FreelanceHub"
-        className="w-28 mb-6 animate-pulse"
-      />
+        {/* Staggered Block Loader */}
+        <div className="flex gap-3 mb-10">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="w-3 h-10 bg-slate-200 rounded-full overflow-hidden relative"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-full"
+                style={{
+                  animation: `blockFill 1.5s ease-in-out infinite`,
+                  animationDelay: `${i * 0.2}s`,
+                }}
+              ></div>
+            </div>
+          ))}
+        </div>
 
-      {/* Brand name */}
-      <h1 className="text-3xl font-bold text-white tracking-wide mb-2">
-        Freelance<span className="text-cyan-400">Hub</span>
-      </h1>
-
-      {/* Loading text */}
-      <p className="text-gray-400 mb-6">Preparing your workspace...</p>
-
-      {/* Loader */}
-      <div className="relative">
-        <div className="w-14 h-14 border-4 border-blue-500/30 rounded-full"></div>
-        <div className="absolute top-0 left-0 w-14 h-14 border-4 border-t-cyan-400 border-r-blue-500 border-b-blue-600 border-l-transparent rounded-full animate-spin"></div>
+        {/* Status Text */}
+        <p className="text-slate-600 text-sm font-semibold tracking-widest uppercase">
+          Initializing secure workspace...
+        </p>
       </div>
+
+      {/* Animations */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes blockFill {
+          0%, 100% { transform: translateY(100%); opacity: 0.3; }
+          50% { transform: translateY(0%); opacity: 1; }
+        }
+        @keyframes pulseScale {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(0.95); opacity: 0.9; }
+        }
+      `}} />
     </div>
   );
 };
