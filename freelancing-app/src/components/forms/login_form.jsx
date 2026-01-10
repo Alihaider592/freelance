@@ -1,4 +1,4 @@
-const loginform = () => {
+const loginForm = () => {
     return (
         <form>
             <input type="email" placeholder="Email" />
@@ -7,3 +7,4 @@ const loginform = () => {
         </form>
     );
 }
+export default loginForm;
