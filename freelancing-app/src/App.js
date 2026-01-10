@@ -7,7 +7,7 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Signup from "./pages/signup";
 import LoadingScreen from "./pages/loading_screen";
-
+import Login from "./pages/login";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +42,15 @@ const router = createBrowserRouter([
       <>
         <NavbarRouterLinks />
         <Signup />
+      </>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <>
+        <NavbarRouterLinks />
+        <Login />
       </>
     ),
   },
