@@ -26,8 +26,8 @@ const NavbarRouterLinks = () => {
 
           {/* Links */}
           <div className="flex items-center gap-8">
-            {["/", "/about", "/contact","/Signup"].map((path, index) => {
-              const labels = ["Home", "About", "Contact","signup"]
+            {["/", "/about", "/contact","/Signup", "/login"].map((path, index) => {
+              const labels = ["Home", "About", "Contact","Signup", "Login"]
               return (
                 <li key={path}>
                   <NavLink
