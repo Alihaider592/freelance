@@ -4,7 +4,7 @@ import {
   FaCreditCard,
   FaBriefcase
 } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 const howworkcards = [
   {
     title: "Create Your Profile",
@@ -12,6 +12,7 @@ const howworkcards = [
       "Create a free account and build a professional profile highlighting your skills, experience, and portfolio to stand out.",
     icon: <FaUserPlus />,
     showButton: true,
+    route : "/signup"
   },
   {
     title: "Find or Post Work",
@@ -38,6 +39,7 @@ const howworkcards = [
 ];
 
 const Howitwork = () => {
+  const navigate = useNavigate();
   return (
     <div className="max-w-[1200px] mx-auto text-center mt-24 px-4">
       {/* Heading */}
@@ -87,6 +89,7 @@ const Howitwork = () => {
               {card.showButton && (
                 <div className="mt-6 flex justify-center">
                   <button
+                    onClick={() => navigate(card.route)}
                     className="relative px-10 py-3 rounded-full text-blue-600 font-semibold
                  border-2 border-blue-600
                  overflow-hidden group
