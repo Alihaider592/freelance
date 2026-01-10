@@ -20,7 +20,7 @@ const LoginPage = () => {
         {/* Illustration */}
         <div className="hidden md:block w-1/2">
           <img
-            src="https://cdni.iconscout.com/illustration/premium/thumb/login-security-5693864-4749308.png"
+            src="https://img.freepik.com/premium-vector/secure-mobile-login-data-privacy_1058841-1739.jpg"
             alt="Login Illustration"
             className="rounded-2xl shadow-xl"
           />
