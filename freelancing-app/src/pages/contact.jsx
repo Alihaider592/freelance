@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import ContactForm from "../components/forms/contact_form";
 
 const Contact = () => {
   return (
     <div className="w-full bg-slate-50 overflow-hidden">
 
-      {/* ================= HERO ================= */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-500 relative py-28 overflow-hidden">
+      {/* HERO */}
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-500 relative py-28">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-[1200px] mx-auto px-6 text-center text-white relative z-10"
+          className="max-w-[1200px] mx-auto px-6 text-center text-white"
         >
           <h1 className="text-5xl font-extrabold mb-6 tracking-tight">
             Contact <span className="text-white">Freelance</span>
@@ -22,10 +23,10 @@ const Contact = () => {
         </motion.div>
       </div>
 
-      {/* ================= CONTACT CONTENT ================= */}
+      {/* CONTENT */}
       <div className="max-w-[1200px] mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-16">
 
-        {/* Contact Info */}
+        {/* LEFT INFO */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -74,51 +75,9 @@ const Contact = () => {
           </div>
         </motion.div>
 
-        {/* Contact Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl shadow-2xl p-10 relative overflow-hidden"
-        >
-          {/* Soft glow */}
-          <div className="absolute -top-32 -right-32 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-cyan-400/20 rounded-full blur-3xl"></div>
+        {/* RIGHT FORM */}
+        <ContactForm />
 
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 relative z-10">
-            Send us a message
-          </h3>
-
-          <form className="space-y-5 relative z-10">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-
-            <textarea
-              rows="5"
-              placeholder="Your Message"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
-            />
-
-            <button
-              type="submit"
-              className="w-full py-3 rounded-xl text-white font-semibold text-lg
-                         bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600
-                         hover:scale-105 hover:shadow-lg transition-all duration-300"
-            >
-              Send Message
-            </button>
-          </form>
-        </motion.div>
       </div>
     </div>
   );
