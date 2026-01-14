@@ -59,11 +59,10 @@ const NavbarRouterLinks = () => {
                     >
                       Hire Talent
                       <FaChevronDown
-  className={`ml-1 text-sm transition-transform duration-200 ${
-    showHire ? "rotate-180" : "rotate-0"
-  }`}
-/>
-
+                        className={`ml-1 text-sm transition-transform duration-200 ${
+                          showHire ? "rotate-180" : "rotate-0"
+                        }`}
+                      />
                     </button>
                   </li>
                 );
