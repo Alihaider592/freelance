@@ -1,29 +1,157 @@
-import { FaCode, FaPaintBrush, FaBullhorn, FaServer } from "react-icons/fa"
+// const HireTalentPanel = () => {
+//   return (
+//     <div className="bg-white">
+//       <div className="max-w-[1216px] mx-auto px-8 py-6">
 
-const data = [
-  { icon: <FaCode />, title: "Developers", desc: "React, Node, Full-Stack" },
-  { icon: <FaPaintBrush />, title: "Designers", desc: "UI, UX, Branding" },
-  { icon: <FaBullhorn />, title: "Marketing", desc: "SEO, Ads, Growth" },
-  { icon: <FaServer />, title: "Backend", desc: "APIs, Databases" }
-]
+//         <div className="grid grid-cols-[2fr_1fr] gap-12">
 
-const HireTalentPanel = () => {
+//           {/* Left: Actions */}
+//           <div>
+//             <div className="text-sm font-semibold text-gray-900 mb-4">
+//               Hiring Center
+//             </div>
+
+//             <div className="grid grid-cols-2 gap-4">
+
+//               <div className="border rounded-md p-4 hover:border-blue-600 cursor-pointer transition">
+//                 <div className="text-sm font-medium text-gray-800">
+//                   Post a job
+//                 </div>
+//                 <div className="text-xs text-gray-500 mt-1">
+//                   Get proposals from qualified freelancers
+//                 </div>
+//               </div>
+
+//               <div className="border rounded-md p-4 hover:border-blue-600 cursor-pointer transition">
+//                 <div className="text-sm font-medium text-gray-800">
+//                   Browse talent
+//                 </div>
+//                 <div className="text-xs text-gray-500 mt-1">
+//                   Search freelancers by skill & availability
+//                 </div>
+//               </div>
+
+//               <div className="border rounded-md p-4 hover:border-blue-600 cursor-pointer transition">
+//                 <div className="text-sm font-medium text-gray-800">
+//                   Shortlisted
+//                 </div>
+//                 <div className="text-xs text-gray-500 mt-1">
+//                   View people you saved
+//                 </div>
+//               </div>
+
+//               <div className="border rounded-md p-4 hover:border-blue-600 cursor-pointer transition">
+//                 <div className="text-sm font-medium text-gray-800">
+//                   Messages
+//                 </div>
+//                 <div className="text-xs text-gray-500 mt-1">
+//                   Talk to candidates
+//                 </div>
+//               </div>
+
+//             </div>
+//           </div>
+
+//           {/* Right: Live status */}
+//           <div>
+//             <div className="text-sm font-semibold text-gray-900 mb-4">
+//               Hiring status
+//             </div>
+
+//             <div className="space-y-3 text-sm">
+
+//               <div className="flex justify-between">
+//                 <span className="text-gray-600">Open jobs</span>
+//                 <span className="font-medium text-gray-900">3</span>
+//               </div>
+
+//               <div className="flex justify-between">
+//                 <span className="text-gray-600">New proposals</span>
+//                 <span className="font-medium text-gray-900">14</span>
+//               </div>
+
+//               <div className="flex justify-between">
+//                 <span className="text-gray-600">Active chats</span>
+//                 <span className="font-medium text-gray-900">5</span>
+//               </div>
+
+//               <div className="flex justify-between">
+//                 <span className="text-gray-600">Hires this month</span>
+//                 <span className="font-medium text-gray-900">2</span>
+//               </div>
+
+//             </div>
+
+//             <div className="mt-6 text-sm text-blue-700 hover:underline cursor-pointer">
+//               Go to hiring dashboard →
+//             </div>
+//           </div>
+
+//         </div>
+
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default HireTalentPanel
+const HireTalentPanelGuest = () => {
   return (
-    <div className="max-w-[1216px] mx-auto px-10 py-12">
-      <div className="grid grid-cols-4 gap-8">
-        {data.map((item, i) => (
-          <div
-            key={i}
-            className="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition cursor-pointer"
-          >
-            <div className="text-blue-600 text-3xl mb-4">{item.icon}</div>
-            <h3 className="text-lg font-semibold">{item.title}</h3>
-            <p className="text-gray-500 text-sm mt-2">{item.desc}</p>
+    <div className="bg-white shadow-lg border-t border-gray-200">
+      <div className="max-w-[1216px] mx-auto px-8 py-6">
+
+        <div className="grid grid-cols-[1.4fr_2fr] gap-12">
+
+          {/* Left: How it works */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <h4 className="text-xs font-semibold text-gray-900 uppercase mb-3 tracking-wide">
+                How it works
+              </h4>
+
+              <ol className="list-decimal list-inside text-gray-600 space-y-2 text-sm">
+                <li>Post your job or project brief</li>
+                <li>Get matched with top freelancers</li>
+                <li>Hire & start working instantly</li>
+              </ol>
+            </div>
+
+            <button className="mt-6 w-full py-2 px-4 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition text-sm font-medium">
+              Sign up to hire
+            </button>
           </div>
-        ))}
+
+          {/* Right: Talent showcase */}
+          <div>
+            <h4 className="text-xs font-semibold text-gray-900 uppercase mb-3 tracking-wide">
+              Talent categories
+            </h4>
+
+            <ul className="grid grid-cols-2 gap-2 text-gray-600 text-sm">
+              <li className="hover:text-blue-700 cursor-pointer transition">Frontend Developers</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">Backend Developers</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">Full-Stack Engineers</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">UI/UX Designers</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">SEO Specialists</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">Product Managers</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">Marketing Experts</li>
+              <li className="hover:text-blue-700 cursor-pointer transition">Brand Strategists</li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Bottom strip */}
+        <div className="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-500 flex justify-between">
+          <span>Hire verified professionals across multiple categories</span>
+          <span className="text-blue-700 hover:underline cursor-pointer">
+            Browse all talent →
+          </span>
+        </div>
+
       </div>
     </div>
   )
 }
 
-export default HireTalentPanel
+export default HireTalentPanelGuest
