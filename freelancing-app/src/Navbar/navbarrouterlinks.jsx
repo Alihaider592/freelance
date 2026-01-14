@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import logoM from "../assets/logoM.png";
 import HireTalentPanel from "../pages/hire_talent";
-
+import { FaChevronDown } from "react-icons/fa6";
 const NavbarRouterLinks = () => {
   const [showHire, setShowHire] = useState(false);
 
@@ -55,9 +55,14 @@ const NavbarRouterLinks = () => {
                   >
                     <button
                       type="button"
-                      className="text-[16px] font-medium transition-all duration-300 text-gray-600 hover:text-blue-800 focus:outline-none"
+                      className="flex items-center text-[16px] font-medium transition-all duration-300 text-gray-600 hover:text-blue-800 focus:outline-none"
                     >
                       Hire Talent
+                      <FaChevronDown
+                        className={`ml-1 text-sm transition-transform duration-200 ${
+                          showHire ? "rotate-180" : "rotate-0"
+                        }`}
+                      />
                     </button>
                   </li>
                 );
