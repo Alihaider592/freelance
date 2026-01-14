@@ -1,11 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import logoM from '../assets/logoM.png'
-import HireTalentPanel from '../pages/hire_talent'
+import { NavLink } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import logoM from "../assets/logoM.png";
+import HireTalentPanel from "../pages/hire_talent";
 
 const NavbarRouterLinks = () => {
-  const [showHire, setShowHire] = useState(false)
+  const [showHire, setShowHire] = useState(false);
 
   return (
     <motion.nav
@@ -16,7 +16,6 @@ const NavbarRouterLinks = () => {
     >
       <div className="max-w-[1216px] mx-auto px-6">
         <ul className="flex items-center justify-between h-20">
-
           {/* Logo */}
           <li>
             <NavLink to="/" className="flex items-center">
@@ -30,10 +29,23 @@ const NavbarRouterLinks = () => {
 
           {/* Links */}
           <div className="flex items-center gap-8">
-            {["/", "/about", "/contact","/Signup", "/login", "/hire_talent"].map((path, index) => {
-              const labels = ["Home", "About", "Contact","Signup", "Login","Hire Talent"]
+            {[
+              "/",
+              "/about",
+              "/contact",
+              "/Signup",
+              "/login",
+              "/hire_talent",
+            ].map((path, index) => {
+              const labels = [
+                "Home",
+                "About",
+                "Contact",
+                "Signup",
+                "Login",
+                "Hire Talent",
+              ];
 
-              // 👇 only wrap Hire Talent
               if (labels[index] === "Hire Talent") {
                 return (
                   <li
@@ -41,19 +53,14 @@ const NavbarRouterLinks = () => {
                     onMouseEnter={() => setShowHire(true)}
                     onMouseLeave={() => setShowHire(false)}
                   >
-                    <NavLink
-                      to={path}
-                      className={({ isActive }) =>
-                        `text-[16px] font-medium transition-all duration-300
-                        ${isActive
-                          ? "text-blue-800 border-b-2 border-blue-800"
-                          : "text-gray-600 hover:text-blue-800"}`
-                      }
+                    <button
+                      type="button"
+                      className="text-[16px] font-medium transition-all duration-300 text-gray-600 hover:text-blue-800 focus:outline-none"
                     >
                       Hire Talent
-                    </NavLink>
+                    </button>
                   </li>
-                )
+                );
               }
 
               return (
@@ -62,15 +69,17 @@ const NavbarRouterLinks = () => {
                     to={path}
                     className={({ isActive }) =>
                       `text-[16px] font-medium transition-all duration-300
-                      ${isActive
-                        ? "text-blue-800 border-b-2 border-blue-800"
-                        : "text-gray-600 hover:text-blue-800"}`
+                      ${
+                        isActive
+                          ? "text-blue-800 border-b-2 border-blue-800"
+                          : "text-gray-600 hover:text-blue-800"
+                      }`
                     }
                   >
                     {labels[index]}
                   </NavLink>
                 </li>
-              )
+              );
             })}
           </div>
         </ul>
@@ -92,9 +101,8 @@ const NavbarRouterLinks = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
     </motion.nav>
-  )
-}
+  );
+};
 
-export default NavbarRouterLinks
+export default NavbarRouterLinks;
