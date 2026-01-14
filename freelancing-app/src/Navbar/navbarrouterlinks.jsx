@@ -1,8 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 import logoM from '../assets/logoM.png'
+import HireTalentPanel from '../pages/hire_talent'
 
 const NavbarRouterLinks = () => {
+  const [showHire, setShowHire] = useState(false)
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -12,7 +16,7 @@ const NavbarRouterLinks = () => {
     >
       <div className="max-w-[1216px] mx-auto px-6">
         <ul className="flex items-center justify-between h-20">
-          
+
           {/* Logo */}
           <li>
             <NavLink to="/" className="flex items-center">
@@ -26,15 +30,39 @@ const NavbarRouterLinks = () => {
 
           {/* Links */}
           <div className="flex items-center gap-8">
-            {["/", "/about", "/contact","/Signup", "/login"].map((path, index) => {
-              const labels = ["Home", "About", "Contact","Signup", "Login"]
+            {["/", "/about", "/contact","/Signup", "/login", "/hire_talent"].map((path, index) => {
+              const labels = ["Home", "About", "Contact","Signup", "Login","Hire Talent"]
+
+              // 👇 only wrap Hire Talent
+              if (labels[index] === "Hire Talent") {
+                return (
+                  <li
+                    key={path}
+                    onMouseEnter={() => setShowHire(true)}
+                    onMouseLeave={() => setShowHire(false)}
+                  >
+                    <NavLink
+                      to={path}
+                      className={({ isActive }) =>
+                        `text-[16px] font-medium transition-all duration-300
+                        ${isActive
+                          ? "text-blue-800 border-b-2 border-blue-800"
+                          : "text-gray-600 hover:text-blue-800"}`
+                      }
+                    >
+                      Hire Talent
+                    </NavLink>
+                  </li>
+                )
+              }
+
               return (
                 <li key={path}>
                   <NavLink
                     to={path}
                     className={({ isActive }) =>
                       `text-[16px] font-medium transition-all duration-300
-                       ${isActive
+                      ${isActive
                         ? "text-blue-800 border-b-2 border-blue-800"
                         : "text-gray-600 hover:text-blue-800"}`
                     }
@@ -45,9 +73,26 @@ const NavbarRouterLinks = () => {
               )
             })}
           </div>
-
         </ul>
       </div>
+
+      {/* Sliding Page */}
+      <AnimatePresence>
+        {showHire && (
+          <motion.div
+            initial={{ y: -60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -60, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="fixed top-20 left-0 w-full bg-white shadow-xl border-t z-40"
+            onMouseEnter={() => setShowHire(true)}
+            onMouseLeave={() => setShowHire(false)}
+          >
+            <HireTalentPanel />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </motion.nav>
   )
 }
