@@ -33,28 +33,23 @@ const NavbarRouterLinks = () => {
             {["/", "/about", "/contact","/Signup", "/login", "/hire_talent"].map((path, index) => {
               const labels = ["Home", "About", "Contact","Signup", "Login","Hire Talent"]
 
-              // 👇 only wrap Hire Talent
               if (labels[index] === "Hire Talent") {
-                return (
-                  <li
-                    key={path}
-                    onMouseEnter={() => setShowHire(true)}
-                    onMouseLeave={() => setShowHire(false)}
-                  >
-                    <NavLink
-                      to={path}
-                      className={({ isActive }) =>
-                        `text-[16px] font-medium transition-all duration-300
-                        ${isActive
-                          ? "text-blue-800 border-b-2 border-blue-800"
-                          : "text-gray-600 hover:text-blue-800"}`
-                      }
-                    >
-                      Hire Talent
-                    </NavLink>
-                  </li>
-                )
-              }
+  return (
+    <li
+      key={path}
+      onMouseEnter={() => setShowHire(true)}
+      onMouseLeave={() => setShowHire(false)}
+    >
+      <button
+        type="button"
+        className="text-[16px] font-medium transition-all duration-300 text-gray-600 hover:text-blue-800 focus:outline-none"
+      >
+        Hire Talent
+      </button>
+    </li>
+  )
+}
+
 
               return (
                 <li key={path}>
