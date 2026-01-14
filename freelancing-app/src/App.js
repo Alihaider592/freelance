@@ -8,6 +8,7 @@ import Contact from "./pages/contact";
 import Signup from "./pages/signup";
 import LoadingScreen from "./pages/loading_screen";
 import Login from "./pages/login";
+import HireTalent from "./pages/hire_talent";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,15 @@ const router = createBrowserRouter([
       <>
         <NavbarRouterLinks />
         <Login />
+      </>
+    ),
+  },
+  {
+    path: "/hire_talent",
+    element: (
+      <>
+        <NavbarRouterLinks />
+        <HireTalent />
       </>
     ),
   },
