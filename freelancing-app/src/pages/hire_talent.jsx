@@ -93,8 +93,20 @@
 //     </div>
 //   )
 // }
-
 // export default HireTalentPanel
+import { Link } from "react-router-dom";
+
+const categories = [
+  { name: "Frontend Developers", slug: "frontend" },
+  { name: "Backend Developers", slug: "backend" },
+  { name: "Full-Stack Engineers", slug: "fullstack" },
+  { name: "UI/UX Designers", slug: "ui-ux" },
+  { name: "SEO Specialists", slug: "seo" },
+  { name: "Product Managers", slug: "product-managers" },
+  { name: "Marketing Experts", slug: "marketing" },
+  { name: "Brand Strategists", slug: "branding" },
+];
+
 const HireTalentPanelGuest = () => {
   return (
     <div className="bg-white shadow-lg border-t border-gray-200">
@@ -121,21 +133,23 @@ const HireTalentPanelGuest = () => {
             </button>
           </div>
 
-          {/* Right: Talent showcase */}
+          {/* Right: Talent categories */}
           <div>
             <h4 className="text-xs font-semibold text-gray-900 uppercase mb-3 tracking-wide">
               Talent categories
             </h4>
 
             <ul className="grid grid-cols-2 gap-2 text-gray-600 text-sm">
-              <li className="hover:text-blue-700 cursor-pointer transition">Frontend Developers</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">Backend Developers</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">Full-Stack Engineers</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">UI/UX Designers</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">SEO Specialists</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">Product Managers</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">Marketing Experts</li>
-              <li className="hover:text-blue-700 cursor-pointer transition">Brand Strategists</li>
+              {categories.map((cat) => (
+                <li key={cat.slug}>
+                  <Link
+                    to={`/talent/${cat.slug}`}
+                    className="hover:text-blue-700 cursor-pointer transition"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -144,14 +158,18 @@ const HireTalentPanelGuest = () => {
         {/* Bottom strip */}
         <div className="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-500 flex justify-between">
           <span>Hire verified professionals across multiple categories</span>
-          <span className="text-blue-700 hover:underline cursor-pointer">
+
+          <Link
+            to="/talent"
+            className="text-blue-700 hover:underline cursor-pointer"
+          >
             Browse all talent →
-          </span>
+          </Link>
         </div>
 
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HireTalentPanelGuest
+export default HireTalentPanelGuest;
