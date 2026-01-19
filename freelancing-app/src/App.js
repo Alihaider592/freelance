@@ -9,6 +9,7 @@ import Signup from "./pages/signup";
 import LoadingScreen from "./pages/loading_screen";
 import Login from "./pages/login";
 import HireTalent from "./pages/hire_talent";
+import TalentByCategory from "./pages/TalentByCategory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,16 @@ const router = createBrowserRouter([
       </>
     ),
   },
+  {
+  path: "/talent/:category",
+  element: (
+    <>
+      <NavbarRouterLinks />
+      <TalentByCategory />
+    </>
+  ),
+},
+
 ]);
 
 export default function App() {
