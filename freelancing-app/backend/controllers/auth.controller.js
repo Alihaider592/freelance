@@ -1,7 +1,5 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-
-// Signup controller
 export const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
