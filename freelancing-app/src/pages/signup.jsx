@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGoogle, FaGithub } from "react-icons/fa";
-import SignupForm from "../components/forms/signup_form";
+import SignupForm from "../components/forms/signup/signup_form";
 
 const SignupPage = () => {
   return (
