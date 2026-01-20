@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Eye, EyeOff, Globe, User, Mail, Lock, Briefcase, Phone, Link as LinkIcon } from "lucide-react";
+const takenUsernames = ["john", "admin", "freelancer123"];
 
 const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [usernameError, setUsernameError] = useState("");
 
-  const updateForm = (field, value) => {
-    setFormData({ ...formData, [field]: value });
-  };
-
-  // Simple password strength indicator
+  const updateForm = (field, value) => setFormData({ ...formData, [field]: value });
   const passwordStrength = (password) => {
     if (password.length > 8) return "Strong";
     if (password.length >= 5) return "Medium";
@@ -18,16 +17,26 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
 
   const passwordColor = (strength) => {
     switch (strength) {
-      case "Strong":
-        return "text-green-600";
-      case "Medium":
-        return "text-yellow-600";
-      case "Weak":
-        return "text-red-600";
-      default:
-        return "text-gray-500";
+      case "Strong": return "text-green-600";
+      case "Medium": return "text-yellow-600";
+      case "Weak": return "text-red-600";
+      default: return "text-gray-500";
     }
   };
+
+  const passwordsMatch = formData.password === formData.confirmPassword;
+  const strength = passwordStrength(formData.password);
+
+  useEffect(() => {
+    if (!formData.username) {
+      setUsernameError("");
+      return;
+    }
+    const isTaken = takenUsernames.includes(formData.username.toLowerCase());
+    setUsernameError(isTaken ? "Username is already taken!" : "");
+  }, [formData.username]);
+
+  const canContinue = passwordsMatch && !usernameError && formData.password && formData.username && strength !== "Weak";
 
   return (
     <div className="w-full flex flex-col gap-6">
@@ -37,7 +46,6 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Full Name */}
         <div className="relative">
           <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
@@ -47,20 +55,19 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             onChange={(e) => updateForm("name", e.target.value)}
           />
         </div>
-
-        {/* Username */}
         <div className="relative">
           <span className="absolute left-3 top-3.5 text-gray-400 font-medium">@</span>
           <input
-            className="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
+            className={`w-full pl-8 pr-4 py-3 border rounded-xl focus:ring-2 outline-none transition 
+              ${usernameError ? "border-red-500 focus:ring-red-400" : "border-gray-200 focus:ring-blue-500 focus:shadow-md"}`}
             placeholder="username"
             value={formData.username || ""}
             onChange={(e) => updateForm("username", e.target.value)}
           />
+          {usernameError && <p className="mt-1 text-sm text-red-600">{usernameError}</p>}
         </div>
       </div>
 
-      {/* Professional Title */}
       <div className="relative">
         <Briefcase className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
         <input
@@ -73,7 +80,6 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Email */}
         <div className="relative">
           <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
@@ -85,7 +91,6 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
           />
         </div>
 
-        {/* Phone Number */}
         <div className="relative">
           <Phone className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
@@ -116,14 +121,47 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
         {formData.password && (
-          <p className={`mt-1 text-sm ${passwordColor(passwordStrength(formData.password))}`}>
-            Password Strength: {passwordStrength(formData.password)}
+          <p className={`mt-1 text-sm ${passwordColor(strength)}`}>
+            Password Strength: {strength}
           </p>
+        )}
+        {strength === "Weak" && formData.password && (
+          <p className="mt-1 text-sm text-red-600">Password is too weak! Use at least 6–8 characters.</p>
         )}
       </div>
 
+      {/* Confirm Password */}
+      <div className="relative w-full">
+        <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+        <input
+          className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:ring-2 outline-none transition 
+            ${formData.confirmPassword
+              ? passwordsMatch
+                ? "border-green-500 focus:ring-green-400"
+                : "border-red-500 focus:ring-red-400"
+              : "border-gray-200 focus:ring-blue-500 focus:shadow-md"}`}
+          placeholder="Confirm Password"
+          type={showConfirm ? "text" : "password"}
+          value={formData.confirmPassword || ""}
+          onChange={(e) => updateForm("confirmPassword", e.target.value)}
+        />
+        <button
+          type="button"
+          className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600"
+          onClick={() => setShowConfirm(!showConfirm)}
+        >
+          {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+        {formData.confirmPassword && !passwordsMatch && (
+          <p className="mt-1 text-sm text-red-600">Passwords do not match!</p>
+        )}
+        {formData.confirmPassword && passwordsMatch && (
+          <p className="mt-1 text-sm text-green-600">Passwords match!</p>
+        )}
+      </div>
+
+      {/* Country / Portfolio */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Country Selector */}
         <div className="relative">
           <Globe className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <select
@@ -136,11 +174,9 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             <option value="UK">United Kingdom</option>
             <option value="CA">Canada</option>
             <option value="IN">India</option>
-            {/* Add more as needed */}
           </select>
         </div>
 
-        {/* Portfolio */}
         <div className="relative">
           <LinkIcon className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
@@ -174,7 +210,9 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
         </button>
         <button
           onClick={nextStep}
-          className="px-10 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition active:scale-95"
+          className={`px-10 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition active:scale-95
+            ${!canContinue ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={!canContinue}
         >
           Continue
         </button>
