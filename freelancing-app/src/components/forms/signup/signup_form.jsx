@@ -48,7 +48,7 @@ const SignupForm = () => {
         )}
 
         {step === 2 && (
-          <StepAccount
+          <StepAccount className="w-full"
             formData={formData}
             setFormData={setFormData}
             nextStep={nextStep}
