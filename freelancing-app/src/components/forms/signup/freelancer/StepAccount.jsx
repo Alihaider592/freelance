@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Globe, User, Mail, Lock, Briefcase, Phone, Link as LinkIcon } from "lucide-react";
+
 const takenUsernames = ["john", "admin", "freelancer123"];
 
 const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
@@ -8,6 +10,7 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
   const [usernameError, setUsernameError] = useState("");
 
   const updateForm = (field, value) => setFormData({ ...formData, [field]: value });
+
   const passwordStrength = (password) => {
     if (password.length > 8) return "Strong";
     if (password.length >= 5) return "Medium";
@@ -36,17 +39,35 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
     setUsernameError(isTaken ? "Username is already taken!" : "");
   }, [formData.username]);
 
-  const canContinue = passwordsMatch && !usernameError && formData.password && formData.username && strength !== "Weak";
+  const canContinue =
+    passwordsMatch &&
+    !usernameError &&
+    formData.password &&
+    formData.username &&
+    strength !== "Weak";
+
+  // Animation variants
+  const fieldVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      <header>
+    <motion.div
+      className="w-full flex flex-col gap-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.header variants={fieldVariants} initial="hidden" animate="visible">
         <h2 className="text-2xl font-bold text-gray-900">Account Details</h2>
-        <p className="text-gray-500 text-sm">Set up your professional presence on the platform.</p>
-      </header>
+        <p className="text-gray-500 text-sm">
+          Set up your professional presence on the platform.
+        </p>
+      </motion.header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative">
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible">
           <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -54,8 +75,9 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             value={formData.name}
             onChange={(e) => updateForm("name", e.target.value)}
           />
-        </div>
-        <div className="relative">
+        </motion.div>
+
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible">
           <span className="absolute left-3 top-3.5 text-gray-400 font-medium">@</span>
           <input
             className={`w-full pl-8 pr-4 py-3 border rounded-xl focus:ring-2 outline-none transition 
@@ -64,11 +86,22 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             value={formData.username || ""}
             onChange={(e) => updateForm("username", e.target.value)}
           />
-          {usernameError && <p className="mt-1 text-sm text-red-600">{usernameError}</p>}
-        </div>
+          <AnimatePresence>
+            {usernameError && (
+              <motion.p
+                className="mt-1 text-sm text-red-600"
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+              >
+                {usernameError}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
-      <div className="relative">
+      <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="relative">
         <Briefcase className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
         <input
           className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -77,10 +110,10 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
           onChange={(e) => updateForm("title", e.target.value)}
         />
         <p className="text-gray-400 text-xs mt-1">This will appear on your public profile.</p>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative">
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible">
           <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -89,9 +122,9 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             value={formData.email}
             onChange={(e) => updateForm("email", e.target.value)}
           />
-        </div>
+        </motion.div>
 
-        <div className="relative">
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible">
           <Phone className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -100,11 +133,11 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             value={formData.phone || ""}
             onChange={(e) => updateForm("phone", e.target.value)}
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Password */}
-      <div className="relative w-full">
+      <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="relative w-full">
         <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
         <input
           className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -120,18 +153,33 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
         >
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
-        {formData.password && (
-          <p className={`mt-1 text-sm ${passwordColor(strength)}`}>
-            Password Strength: {strength}
-          </p>
-        )}
-        {strength === "Weak" && formData.password && (
-          <p className="mt-1 text-sm text-red-600">Password is too weak! Use at least 6–8 characters.</p>
-        )}
-      </div>
+
+        <AnimatePresence>
+          {formData.password && (
+            <motion.p
+              className={`mt-1 text-sm ${passwordColor(strength)}`}
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+            >
+              Password Strength: {strength}
+            </motion.p>
+          )}
+          {strength === "Weak" && formData.password && (
+            <motion.p
+              className="mt-1 text-sm text-red-600"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+            >
+              Password is too weak! Use at least 6–8 characters.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
       {/* Confirm Password */}
-      <div className="relative w-full">
+      <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="relative w-full">
         <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
         <input
           className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:ring-2 outline-none transition 
@@ -152,17 +200,34 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
         >
           {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
-        {formData.confirmPassword && !passwordsMatch && (
-          <p className="mt-1 text-sm text-red-600">Passwords do not match!</p>
-        )}
-        {formData.confirmPassword && passwordsMatch && (
-          <p className="mt-1 text-sm text-green-600">Passwords match!</p>
-        )}
-      </div>
+
+        <AnimatePresence>
+          {formData.confirmPassword && !passwordsMatch && (
+            <motion.p
+              className="mt-1 text-sm text-red-600"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+            >
+              Passwords do not match!
+            </motion.p>
+          )}
+          {formData.confirmPassword && passwordsMatch && (
+            <motion.p
+              className="mt-1 text-sm text-green-600"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+            >
+              Passwords match!
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
       {/* Country / Portfolio */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative">
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="relative">
           <Globe className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <select
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition bg-white appearance-none"
@@ -175,9 +240,9 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             <option value="CA">Canada</option>
             <option value="IN">India</option>
           </select>
-        </div>
+        </motion.div>
 
-        <div className="relative">
+        <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="relative">
           <LinkIcon className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
           <input
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition"
@@ -185,11 +250,11 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
             value={formData.portfolio || ""}
             onChange={(e) => updateForm("portfolio", e.target.value)}
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Optional Bio */}
-      <div className="flex flex-col">
+      <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="flex flex-col">
         <label className="text-gray-600 mb-1">Short Bio (optional)</label>
         <textarea
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:shadow-md outline-none transition resize-none"
@@ -198,10 +263,10 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
           value={formData.bio || ""}
           onChange={(e) => updateForm("bio", e.target.value)}
         />
-      </div>
+      </motion.div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between mt-4">
+      <motion.div variants={fieldVariants} initial="hidden" animate="visible" className="flex items-center justify-between mt-4">
         <button
           onClick={prevStep}
           className="px-8 py-3 font-semibold text-gray-500 hover:text-gray-800 transition"
@@ -216,8 +281,8 @@ const StepAccount = ({ formData, setFormData, nextStep, prevStep }) => {
         >
           Continue
         </button>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
