@@ -20,9 +20,25 @@ const SignupForm = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white w-full max-w-lg p-8 rounded-xl shadow">
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6">
 
+      {/* STEP INDICATOR */}
+      <div className="flex items-center justify-between mb-8 text-sm font-medium">
+        <span className={step >= 1 ? "text-blue-600" : "text-gray-400"}>
+          Role
+        </span>
+        <div className="flex-1 mx-2 h-px bg-gray-300" />
+        <span className={step >= 2 ? "text-blue-600" : "text-gray-400"}>
+          Account
+        </span>
+        <div className="flex-1 mx-2 h-px bg-gray-300" />
+        <span className={step >= 3 ? "text-blue-600" : "text-gray-400"}>
+          Details
+        </span>
+      </div>
+
+      {/* STEPS */}
+      <div className="w-full">
         {step === 1 && (
           <SelectRole
             formData={formData}
@@ -47,8 +63,8 @@ const SignupForm = () => {
             prevStep={prevStep}
           />
         )}
-
       </div>
+
     </div>
   );
 };
