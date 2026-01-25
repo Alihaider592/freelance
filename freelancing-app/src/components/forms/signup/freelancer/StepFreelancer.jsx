@@ -178,7 +178,7 @@ const StepFreelancer = ({ formData, setFormData, prevStep, nextStep }) => {
           onClick={nextStep}
           className="px-10 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition active:scale-95"
         >
-          Complete Profile
+          create account
         </button>
       </motion.div>
     </motion.div>
