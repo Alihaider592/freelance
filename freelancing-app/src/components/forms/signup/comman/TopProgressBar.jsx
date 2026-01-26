@@ -1,21 +1,20 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react"; // Optional: npm i lucide-react
+import { Check } from "lucide-react"; // npm i lucide-react
 
 const TopProgressBar = ({ step, totalSteps }) => {
   // Calculate width for the progress line
   const progress = ((step - 1) / (totalSteps - 1)) * 100;
 
   return (
-    <div className="relative w-full py-4 px-2">
-      {/* Container for the line and dots */}
+    <div className="relative w-full py-6 px-2">
       <div className="relative flex items-center justify-between w-full">
         
-        {/* Background Track */}
+        {/* Background Track (Gray) */}
         <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 rounded-full" />
 
-        {/* Animated Progress Line */}
+        {/* Animated Progress Line (Blue) */}
         <motion.div
-          className="absolute top-1/2 left-0 h-1 bg-teal-500 -translate-y-1/2 rounded-full origin-left"
+          className="absolute top-1/2 left-0 h-1 bg-blue-500 -translate-y-1/2 rounded-full origin-left"
           initial={{ width: "0%" }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -32,20 +31,29 @@ const TopProgressBar = ({ step, totalSteps }) => {
               <motion.div
                 initial={false}
                 animate={{
-                  backgroundColor: isCompleted || isActive ? "#14b8a6" : "#cbd5e1", // teal-500 or slate-300
-                  scale: isActive ? 1.2 : 1,
+                  // Updated hex to #3b82f6 (Tailwind Blue 500)
+                  backgroundColor: isCompleted || isActive ? "#3b82f6" : "#cbd5e1",
+                  scale: isActive ? 1.15 : 1,
                 }}
-                className={`flex items-center justify-center w-8 h-8 rounded-full border-4 border-white shadow-sm transition-colors duration-300`}
+                className={`flex items-center justify-center w-8 h-8 rounded-full border-4 border-white shadow-sm transition-colors duration-300 ${
+                  isActive ? "ring-2 ring-blue-500/30" : ""
+                }`}
               >
                 {isCompleted ? (
                   <Check className="w-4 h-4 text-white" strokeWidth={3} />
                 ) : (
-                  <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-white' : 'bg-transparent'}`} />
+                  <div 
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      isActive ? 'bg-white' : 'bg-transparent'
+                    }`} 
+                  />
                 )}
               </motion.div>
 
-              {/* Step Label (Optional) */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-500 whitespace-nowrap">
+              {/* Step Label */}
+              <div className={`absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-semibold whitespace-nowrap transition-colors duration-300 ${
+                isActive || isCompleted ? "text-blue-600" : "text-gray-400"
+              }`}>
                 Step {stepNumber}
               </div>
             </div>
