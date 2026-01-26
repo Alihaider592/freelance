@@ -62,10 +62,10 @@ const SignupForm = () => {
   };
 
   return (
-   <div className="flex gap-12 mt-12">
+   <div className="gap-12 mt-12">
   {/* LEFT: animated form steps */}
   <TopProgressBar step={step} totalSteps={steps.length} />
-  <div className="flex-1">
+  <div className="flex-1 mt-12">
     <AnimatePresence mode="wait">
       {step === 1 && (
         <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
