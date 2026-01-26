@@ -46,14 +46,14 @@ const SignupForm = () => {
   const nextStep = () => setStep((prev) => Math.min(prev + 1, steps.length));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  // Handle final submission (used for Skip or Final Step)
+
   const handleFinalSubmit = () => {
     console.log("Profile created with partial data:", formData);
-    // Add your API call/navigation logic here
+
     alert("Profile Created! You can complete the rest in your dashboard.");
   };
 
-  // Animation variants for steps
+
   const stepVariants = {
     hidden: { opacity: 0, x: 20 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
@@ -63,13 +63,13 @@ const SignupForm = () => {
   return (
     <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-10">
       
-      {/* SKIP BUTTON SECTION */}
+
      <div className="flex justify-end mb-8 relative">
   <AnimatePresence>
     {step >= 4 && (
       <div className="relative group">
         
-        {/* RADIATING WAVES BEHIND BUTTON */}
+
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
@@ -88,7 +88,7 @@ const SignupForm = () => {
           />
         ))}
 
-        {/* THE ACTUAL BUTTON */}
+
         <motion.button
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ const SignupForm = () => {
           onClick={handleFinalSubmit}
           className="relative z-10 flex items-center gap-2 px-6 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-bold text-gray-600 hover:bg-white hover:border-blue-500 hover:text-blue-600 transition-all shadow-md active:scale-95"
         >
-          {/* LIVE CENTER DOT */}
+
           <span className="flex h-2 w-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.8)]" />
           
           Skip for now
@@ -109,41 +109,52 @@ const SignupForm = () => {
 </div>
 
       {/* MODERN PROGRESS BAR */}
-      <div className="relative mb-12">
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-100 -translate-y-1/2 rounded-full" />
+      <div className="relative mb-14">
+  {/* Background bar */}
+  <div className="absolute top-1/2 left-0 w-full h-2 bg-gray-200 -translate-y-1/2 rounded-full" />
+
+  {/* Progress bar */}
+  <motion.div
+    className="absolute top-1/2 left-0 h-2 -translate-y-1/2 rounded-full
+               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600
+               shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+    initial={{ width: "0%" }}
+    animate={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
+    transition={{ duration: 0.6, ease: "easeInOut" }}
+  />
+
+  <div className="relative flex justify-between w-full">
+    {steps.map((s) => (
+      <div key={s.id} className="flex flex-col items-center relative">
         <motion.div
-          className="absolute top-1/2 left-0 h-1 bg-blue-600 -translate-y-1/2 rounded-full"
-          initial={{ width: "0%" }}
-          animate={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
-        <div className="relative flex justify-between w-full">
-          {steps.map((s) => (
-            <div key={s.id} className="flex flex-col items-center">
-              <motion.div
-                initial={false}
-                animate={{
-                  backgroundColor: step >= s.id ? "#2563eb" : "#ffffff",
-                  borderColor: step >= s.id ? "#2563eb" : "#e5e7eb",
-                  scale: step === s.id ? 1.2 : 1,
-                }}
-                className="w-10 h-10 rounded-full border-2 flex items-center justify-center z-10 transition-colors duration-300 shadow-sm"
-              >
-                {step > s.id ? (
-                  <Check className="w-5 h-5 text-white" />
-                ) : (
-                  <span className={`text-sm font-bold ${step >= s.id ? "text-white" : "text-gray-400"}`}>
-                    {s.id}
-                  </span>
-                )}
-              </motion.div>
-              <span className={`absolute -bottom-7 text-xs font-semibold uppercase tracking-wider ${step >= s.id ? "text-blue-600" : "text-gray-400"}`}>
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
+          animate={{
+            backgroundColor: step >= s.id ? "#2563eb" : "#ffffff",
+            borderColor: step >= s.id ? "#2563eb" : "#d1d5db",
+            scale: step === s.id ? 1.25 : 1,
+          }}
+          className="w-11 h-11 rounded-full border-2 flex items-center justify-center
+                     z-10 shadow-md"
+        >
+          {step > s.id ? (
+            <Check className="w-5 h-5 text-white" />
+          ) : (
+            <span className={`text-sm font-bold ${step >= s.id ? "text-white" : "text-gray-400"}`}>
+              {s.id}
+            </span>
+          )}
+        </motion.div>
+
+        <span
+          className={`mt-3 text-xs font-semibold uppercase tracking-wide
+          ${step >= s.id ? "text-blue-600" : "text-gray-400"}`}
+        >
+          {s.label}
+        </span>
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* ANIMATED STEPS */}
       <div className="w-full mt-16">
