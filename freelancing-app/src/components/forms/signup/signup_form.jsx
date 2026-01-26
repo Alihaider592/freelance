@@ -109,45 +109,41 @@ const SignupForm = () => {
 </div>
 
       {/* MODERN PROGRESS BAR */}
-      <div className="mb-12 flex gap-3 justify-between">
-  {steps.map((s) => {
-    const isActive = step === s.id
-    const isCompleted = step > s.id
-
-    return (
-      <motion.div
-        key={s.id}
-        initial={false}
-        animate={{
-          scale: isActive ? 1.05 : 1,
-        }}
-        className={`
-          flex-1 flex items-center gap-3 px-4 py-3 rounded-xl border
-          transition-all duration-300
-          ${isCompleted && "bg-blue-600 border-blue-600 text-white"}
-          ${isActive && !isCompleted && "bg-blue-50 border-blue-600 text-blue-700"}
-          ${!isActive && !isCompleted && "bg-white border-gray-200 text-gray-400"}
-        `}
-      >
-        <div
-          className={`
-            w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
-            ${isCompleted && "bg-white text-blue-600"}
-            ${isActive && !isCompleted && "bg-blue-600 text-white"}
-            ${!isActive && !isCompleted && "bg-gray-100"}
-          `}
-        >
-          {isCompleted ? <Check className="w-4 h-4" /> : s.id}
+      <div className="relative mb-12">
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-100 -translate-y-1/2 rounded-full" />
+        <motion.div
+          className="absolute top-1/2 left-0 h-1 bg-blue-600 -translate-y-1/2 rounded-full"
+          initial={{ width: "0%" }}
+          animate={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+        <div className="relative flex justify-between w-full">
+          {steps.map((s) => (
+            <div key={s.id} className="flex flex-col items-center">
+              <motion.div
+                initial={false}
+                animate={{
+                  backgroundColor: step >= s.id ? "#2563eb" : "#ffffff",
+                  borderColor: step >= s.id ? "#2563eb" : "#e5e7eb",
+                  scale: step === s.id ? 1.2 : 1,
+                }}
+                className="w-10 h-10 rounded-full border-2 flex items-center justify-center z-10 transition-colors duration-300 shadow-sm"
+              >
+                {step > s.id ? (
+                  <Check className="w-5 h-5 text-white" />
+                ) : (
+                  <span className={`text-sm font-bold ${step >= s.id ? "text-white" : "text-gray-400"}`}>
+                    {s.id}
+                  </span>
+                )}
+              </motion.div>
+              <span className={`absolute -bottom-7 text-xs font-semibold uppercase tracking-wider ${step >= s.id ? "text-blue-600" : "text-gray-400"}`}>
+                {s.label}
+              </span>
+            </div>
+          ))}
         </div>
-
-        <span className="text-sm font-semibold uppercase tracking-wide">
-          {s.label}
-        </span>
-      </motion.div>
-    )
-  })}
-</div>
-
+      </div>
 
       {/* ANIMATED STEPS */}
       <div className="w-full mt-16">
