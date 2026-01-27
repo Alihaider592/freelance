@@ -67,7 +67,7 @@ const SignupForm = () => {
     <div className="gap-12 mt-12 w-full">
       {/* LEFT: animated form steps */}
       <TopProgressBar step={step} totalSteps={steps.length} />
-      <div className="flex justify-start w-full ">
+      <div className="flex justify-center items-center w-full ">
         <div className="flex-1 mt-12">
           <AnimatePresence mode="wait">
             {step === 1 && (
