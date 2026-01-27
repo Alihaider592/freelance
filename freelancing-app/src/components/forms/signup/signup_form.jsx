@@ -191,7 +191,10 @@ const SignupForm = () => {
         </div>
 
         {/* RIGHT: step circles */}
-        <StepCircles className="" step={step} steps={steps} />
+        <StepCircles
+  step={step}
+  totalSteps={steps.length}
+/>
       </div>
     </div>
   );
