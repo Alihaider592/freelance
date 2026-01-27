@@ -47,79 +47,153 @@ const SignupForm = () => {
   const nextStep = () => setStep((prev) => Math.min(prev + 1, steps.length));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-
   const handleFinalSubmit = () => {
     console.log("Profile created with partial data:", formData);
 
     alert("Profile Created! You can complete the rest in your dashboard.");
   };
 
-
   const stepVariants = {
     hidden: { opacity: 0, x: 20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
     exit: { opacity: 0, x: -20, transition: { duration: 0.3, ease: "easeIn" } },
   };
 
   return (
-   <div className="gap-12 mt-12">
-  {/* LEFT: animated form steps */}
-  <TopProgressBar step={step} totalSteps={steps.length} />
-  <div className="flex-1 mt-12">
-    <AnimatePresence mode="wait">
-      {step === 1 && (
-        <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <SelectRole formData={formData} setFormData={setFormData} nextStep={nextStep} />
-        </motion.div>
-      )}
+    <div className="gap-12 mt-12 w-full">
+      {/* LEFT: animated form steps */}
+      <TopProgressBar step={step} totalSteps={steps.length} />
+      <div className="flex justify-center items-center w-full ">
+        <div className="flex-1 mt-12">
+          <AnimatePresence mode="wait">
+            {step === 1 && (
+              <motion.div
+                key="step1"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <SelectRole
+                  formData={formData}
+                  setFormData={setFormData}
+                  nextStep={nextStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 2 && (
-        <motion.div key="step2" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepAccount formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />
-        </motion.div>
-      )}
+            {step === 2 && (
+              <motion.div
+                key="step2"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepAccount
+                  formData={formData}
+                  setFormData={setFormData}
+                  nextStep={nextStep}
+                  prevStep={prevStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 3 && (
-        <motion.div key="step3" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepFreelancer formData={formData} setFormData={setFormData} prevStep={prevStep} nextStep={nextStep} />
-        </motion.div>
-      )}
+            {step === 3 && (
+              <motion.div
+                key="step3"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepFreelancer
+                  formData={formData}
+                  setFormData={setFormData}
+                  prevStep={prevStep}
+                  nextStep={nextStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 4 && (
-        <motion.div key="step4" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepSkills formData={formData} setFormData={setFormData} prevStep={prevStep} nextStep={nextStep} />
-        </motion.div>
-      )}
+            {step === 4 && (
+              <motion.div
+                key="step4"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepSkills
+                  formData={formData}
+                  setFormData={setFormData}
+                  prevStep={prevStep}
+                  nextStep={nextStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 5 && (
-        <motion.div key="step5" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepPayment formData={formData} setFormData={setFormData} prevStep={prevStep} nextStep={nextStep} />
-        </motion.div>
-      )}
+            {step === 5 && (
+              <motion.div
+                key="step5"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepPayment
+                  formData={formData}
+                  setFormData={setFormData}
+                  prevStep={prevStep}
+                  nextStep={nextStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 6 && (
-        <motion.div key="step6" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepVerification formData={formData} setFormData={setFormData} prevStep={prevStep} nextStep={nextStep} />
-        </motion.div>
-      )}
+            {step === 6 && (
+              <motion.div
+                key="step6"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepVerification
+                  formData={formData}
+                  setFormData={setFormData}
+                  prevStep={prevStep}
+                  nextStep={nextStep}
+                />
+              </motion.div>
+            )}
 
-      {step === 7 && (
-        <motion.div key="step7" variants={stepVariants} initial="hidden" animate="visible" exit="exit">
-          <StepTaxLocation
-            formData={formData}
-            setFormData={setFormData}
-            prevStep={prevStep}
-            onFinish={handleFinalSubmit}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
+            {step === 7 && (
+              <motion.div
+                key="step7"
+                variants={stepVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <StepTaxLocation
+                  formData={formData}
+                  setFormData={setFormData}
+                  prevStep={prevStep}
+                  onFinish={handleFinalSubmit}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
-  {/* RIGHT: step circles */}
-  <StepCircles step={step} steps={steps} />
-</div>
-
+        {/* RIGHT: step circles */}
+        <StepCircles step={step} totalSteps={steps.length} />
+      </div>
+    </div>
   );
 };
 
