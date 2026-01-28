@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react"; // Added ArrowRight
+import { Check, ArrowRight } from "lucide-react";
 
 // Import all step components
 import SelectRole from "./selectrole";
@@ -12,6 +12,7 @@ import StepVerification from "./comman/StepVerification";
 import StepTaxLocation from "./comman/StepTaxLocation";
 import TopProgressBar from "./comman/TopProgressBar";
 import StepCircles from "./comman/StepCircles";
+
 const steps = [
   { id: 1, label: "Role" },
   { id: 2, label: "Account" },
@@ -49,7 +50,6 @@ const SignupForm = () => {
 
   const handleFinalSubmit = () => {
     console.log("Profile created with partial data:", formData);
-
     alert("Profile Created! You can complete the rest in your dashboard.");
   };
 
@@ -60,15 +60,21 @@ const SignupForm = () => {
       x: 0,
       transition: { duration: 0.4, ease: "easeOut" },
     },
-    exit: { opacity: 0, x: -20, transition: { duration: 0.3, ease: "easeIn" } },
+    exit: {
+      opacity: 0,
+      x: -20,
+      transition: { duration: 0.3, ease: "easeIn" },
+    },
   };
 
   return (
-    <div className="gap-12 mt-12 w-full">
-      {/* LEFT: animated form steps */}
+    <div className="w-full mt-12 space-y-12">
+      {/* Top progress bar */}
       <TopProgressBar step={step} totalSteps={steps.length} />
-      <div className="flex justify-center items-center w-full ">
-        <div className="flex-1 mt-12">
+
+      <div className="flex justify-center items-start w-full gap-16">
+        {/* LEFT: animated form */}
+        <div className="flex-1 max-w-3xl">
           <AnimatePresence mode="wait">
             {step === 1 && (
               <motion.div
@@ -191,7 +197,9 @@ const SignupForm = () => {
         </div>
 
         {/* RIGHT: step circles */}
-        <StepCircles step={step} totalSteps={steps.length} />
+        <div className="sticky top-28">
+          <StepCircles step={step} totalSteps={steps.length} />
+        </div>
       </div>
     </div>
   );
