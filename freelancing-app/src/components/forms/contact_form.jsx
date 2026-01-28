@@ -9,7 +9,6 @@ const ContactForm = () => {
       viewport={{ once: true }}
       className="bg-white rounded-3xl shadow-2xl p-10 relative overflow-hidden"
     >
-      {/* Soft Glow */}
       <div className="absolute -top-32 -right-32 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-cyan-400/20 rounded-full blur-3xl"></div>
 
