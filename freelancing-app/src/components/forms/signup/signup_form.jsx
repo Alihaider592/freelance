@@ -195,8 +195,6 @@ const SignupForm = () => {
             )}
           </AnimatePresence>
         </div>
-
-        {/* RIGHT: step circles */}
         <div className="sticky top-28">
           <StepCircles step={step} totalSteps={steps.length} />
         </div>
