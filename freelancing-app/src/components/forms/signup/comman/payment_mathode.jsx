@@ -81,3 +81,4 @@ const StepPayment = ({ formData, setFormData, nextStep, prevStep }) => {
     </div>
   );
 };
+export default StepPayment;
