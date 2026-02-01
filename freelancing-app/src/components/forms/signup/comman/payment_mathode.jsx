@@ -1,228 +1,78 @@
-import { useState } from "react";
-import {
-  Wallet,
-  Landmark,
-  Smartphone,
-  CheckCircle,
-  Plus,
-} from "lucide-react";
-
-const PAYMENT_TYPES = [
-  {
-    id: "payoneer",
-    title: "Payoneer",
-    icon: <Wallet />,
-  },
-  {
-    id: "wise",
-    title: "Wise",
-    icon: <Landmark />,
-  },
-  {
-    id: "bank",
-    title: "Local Bank",
-    icon: <Landmark />,
-  },
-  {
-    id: "wallet",
-    title: "JazzCash / Easypaisa",
-    icon: <Smartphone />,
-  },
-];
-
+import { CreditCard, Wallet, Landmark, Smartphone } from "lucide-react";
 const StepPayment = ({ formData, setFormData, nextStep, prevStep }) => {
-  const [selectedType, setSelectedType] = useState(null);
-  const [details, setDetails] = useState({});
-  const [savedMethods, setSavedMethods] = useState(
-    formData.paymentMethods || []
-  );
-
-  // Save payment method
-  const handleSaveMethod = () => {
-    const newMethod = {
-      id: Date.now(),
-      type: selectedType,
-      details,
-      isDefault: savedMethods.length === 0,
-    };
-
-    const updated = [...savedMethods, newMethod];
-    setSavedMethods(updated);
-
-    setFormData({
-      ...formData,
-      paymentMethods: updated,
-    });
-
-    setSelectedType(null);
-    setDetails({});
-  };
-
-  const setDefault = (id) => {
-    const updated = savedMethods.map((m) => ({
-      ...m,
-      isDefault: m.id === id,
-    }));
-
-    setSavedMethods(updated);
-    setFormData({ ...formData, paymentMethods: updated });
-  };
+  const methods = [
+    {
+      id: "payoneer",
+      title: "Payoneer",
+      sub: "Global freelancer withdrawals (Recommended)",
+      icon: <Wallet />,
+    },
+    {
+      id: "wise",
+      title: "Wise",
+      sub: "Low-fee international transfers",
+      icon: <Landmark />,
+    },
+    {
+      id: "bank",
+      title: "Local Bank Account",
+      sub: "Direct PKR transfer (IBFT)",
+      icon: <Landmark />,
+    },
+    {
+      id: "mobile_wallet",
+      title: "JazzCash / Easypaisa",
+      sub: "Instant local wallet withdrawal",
+      icon: <Smartphone />,
+    },
+  ];
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-xl font-bold">Payment Methods</h2>
+    <div className="space-y-6">
+      <h2 className="text-xl font-bold text-gray-900">
+        How do you want to receive payments?
+      </h2>
+      <p className="text-sm text-gray-500">
+        You can add or change this later from your dashboard.
+      </p>
 
-      {/* SAVED METHODS */}
-      {savedMethods.length > 0 && (
-        <div className="space-y-3">
-          {savedMethods.map((m) => (
+      <div className="grid gap-4">
+        {methods.map((m) => (
+          <button
+            key={m.id}
+            onClick={() =>
+              setFormData({ ...formData, paymentMethod: m.id })
+            }
+            className={`flex items-center gap-4 p-4 rounded-2xl border-2 transition-all ${
+              formData.paymentMethod === m.id
+                ? "border-blue-600 bg-blue-50"
+                : "border-gray-100 hover:border-gray-200"
+            }`}
+          >
             <div
-              key={m.id}
-              className="flex items-center justify-between p-4 border rounded-xl"
-            >
-              <div>
-                <p className="font-semibold capitalize">{m.type}</p>
-                <p className="text-xs text-gray-500">
-                  {Object.values(m.details).join(" • ")}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                {m.isDefault && (
-                  <span className="text-green-600 flex items-center gap-1 text-sm">
-                    <CheckCircle size={16} /> Default
-                  </span>
-                )}
-                {!m.isDefault && (
-                  <button
-                    onClick={() => setDefault(m.id)}
-                    className="text-blue-600 text-sm"
-                  >
-                    Set Default
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ADD NEW METHOD */}
-      {!selectedType && (
-        <div className="grid grid-cols-2 gap-4">
-          {PAYMENT_TYPES.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setSelectedType(m.id)}
-              className="p-4 border rounded-2xl flex items-center gap-3 hover:border-blue-600"
+              className={`p-3 rounded-xl ${
+                formData.paymentMethod === m.id
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-400"
+              }`}
             >
               {m.icon}
-              <span className="font-semibold">{m.title}</span>
-            </button>
-          ))}
-        </div>
-      )}
+            </div>
+            <div className="text-left">
+              <p className="font-bold text-gray-900">{m.title}</p>
+              <p className="text-xs text-gray-500">{m.sub}</p>
+            </div>
+          </button>
+        ))}
+      </div>
 
-      {/* DYNAMIC FORMS */}
-      {selectedType && (
-        <div className="space-y-4 border p-4 rounded-2xl">
-          <h3 className="font-bold capitalize">
-            Add {selectedType} details
-          </h3>
-
-          {selectedType === "payoneer" && (
-            <input
-              placeholder="Payoneer Email"
-              className="input"
-              onChange={(e) =>
-                setDetails({ email: e.target.value })
-              }
-            />
-          )}
-
-          {selectedType === "wise" && (
-            <input
-              placeholder="Wise Email or IBAN"
-              className="input"
-              onChange={(e) =>
-                setDetails({ account: e.target.value })
-              }
-            />
-          )}
-
-          {selectedType === "bank" && (
-            <>
-              <input
-                placeholder="Bank Name"
-                className="input"
-                onChange={(e) =>
-                  setDetails((d) => ({
-                    ...d,
-                    bankName: e.target.value,
-                  }))
-                }
-              />
-              <input
-                placeholder="Account Number"
-                className="input"
-                onChange={(e) =>
-                  setDetails((d) => ({
-                    ...d,
-                    accountNumber: e.target.value,
-                  }))
-                }
-              />
-              <input
-                placeholder="IBAN"
-                className="input"
-                onChange={(e) =>
-                  setDetails((d) => ({
-                    ...d,
-                    iban: e.target.value,
-                  }))
-                }
-              />
-            </>
-          )}
-
-          {selectedType === "wallet" && (
-            <input
-              placeholder="Mobile Number"
-              className="input"
-              onChange={(e) =>
-                setDetails({ phone: e.target.value })
-              }
-            />
-          )}
-
-          <div className="flex gap-3">
-            <button
-              onClick={handleSaveMethod}
-              className="bg-blue-600 text-white px-6 py-2 rounded-xl"
-            >
-              Save Method
-            </button>
-            <button
-              onClick={() => {
-                setSelectedType(null);
-                setDetails({});
-              }}
-              className="text-gray-500"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* NAVIGATION */}
-      <div className="flex justify-between pt-6">
+      <div className="flex justify-between mt-8">
         <button onClick={prevStep} className="text-gray-400 font-bold">
           Back
         </button>
         <button
           onClick={nextStep}
-          disabled={savedMethods.length === 0}
+          disabled={!formData.paymentMethod}
           className="bg-blue-600 text-white px-10 py-3 rounded-xl font-bold disabled:opacity-50"
         >
           Continue
@@ -231,5 +81,4 @@ const StepPayment = ({ formData, setFormData, nextStep, prevStep }) => {
     </div>
   );
 };
-
 export default StepPayment;
